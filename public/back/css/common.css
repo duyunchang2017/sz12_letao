@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/*登录页的背景颜色*/
+.login_bg{
+    background-color: #222d32;
+}
+.mt_150{
+    margin-top: 150px;
+}
+.panel h4 {
+    text-align: center;
+}
