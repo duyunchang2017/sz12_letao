@@ -31,6 +31,11 @@ $(function(){
                     notEmpty: {
                         message: '用户名不能为空'
                     },
+                    //不一定是callback,其他的也可以
+                    callback:{
+                        message:"用户名错误"
+                    }
+
                     //长度校验
                     //stringLength: {
                     //    min: 6,
@@ -56,6 +61,10 @@ $(function(){
                         max: 12,
                         message: '密码长度必须在6到12之间'
                     },
+                    //不一定是callback,其他的也可以
+                    callback:{
+                        message:"密码错误"
+                    }
                 }
 
             }
@@ -76,17 +85,25 @@ $(function(){
             dataType:'json',//dataType默认是json格式的数据类型，如果
             //dataType是json格式的数据类型，dataType就可以不写，如果
             //是text/html,即字符串就需要写
+
             success:function(data){
+                //console.log(data);
                 //做判断data是一个对象
                 if(data.success){
                     //跳转到首页
                     location.href = "index.html";
                 }
                 if(data.error === 1000){
-                   alert('用户名不存在');
+                  //使用updateStatus方法，主动地把username这个字段变成校验失败
+                    //第一个参数：字段名，即表单中的name属性
+                    //第二个参数：INVALID ：校验失败
+                    //第三个参数：配置提示消息
+                   $form.data('bootstrapValidator').updateStatus("username","INVALID","callback");
                 }
                 if(data.error === 1001 ){
-                    alert('密码错误');
+                    //alert('密码错误');
+                    //手动让密码校验失败
+                    $form.data('bootstrapValidator').updateStatus("password","INVALID","callback");
                 }
 
             }
@@ -95,4 +112,10 @@ $(function(){
         });
 
     });
+    //表单重置功能
+    $('[type="reset"]').on('click',function(){
+        //获取到validator实例（对象）
+         $("form").data('bootstrapValidator').resetForm()
+
+    })
 });
