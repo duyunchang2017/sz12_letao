@@ -32,6 +32,11 @@ a:active{
     height: 100%;
     background-color: #222d32;
     position: absolute;
+    left: 0;
+    transition: all 1s;
+}
+.lt_aside.now{
+    left: -180px;
 }
 .lt_aside .brand a{
     display: block;
@@ -81,6 +86,10 @@ a:active{
 .lt_main {
     height: 100%;
     padding-left: 180px;
+    transition: all 1s;
+}
+.lt_main.now{
+    padding-left: 0;
 }
 .lt_main .topbar{
     height: 50px;
@@ -93,6 +102,11 @@ a:active{
     color: #fff;
     font-size: 16px;
 
+}
+.pic_left,
+.pic_right{
+    width: 45%;
+    height: 400px;
 }
 
 
