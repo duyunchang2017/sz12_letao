@@ -16,6 +16,10 @@ a:visited,
 a:active{
     text-decoration: none;
 }
+.table.table-bordered td{
+    text-align: center;
+    vertical-align: middle;
+}
 /*登录页的背景颜色*/
 .login_bg{
     background-color: #222d32;
@@ -108,6 +112,7 @@ a:active{
     width: 45%;
     height: 400px;
 }
+
 
 
 
