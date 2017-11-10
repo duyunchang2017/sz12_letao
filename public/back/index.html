@@ -2,9 +2,66 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>标题</title>
+    <title>乐淘管理系统-首页</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.css">
+    <link rel="stylesheet" href="lib/nprogress/nprogress.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
 </head>
 <body>
-首页
+<!--aside侧边栏-->
+<div class="lt_aside">
+    <!-- 品牌区-->
+    <div class="brand">
+        <a href="index.html">黑马12期</a>
+    </div>
+    <!-- 用户信息区-->
+    <div class="user">
+        <img src="images/default.png" alt=""/>
+        <p>超级管理员</p>
+    </div>
+    <!-- 导航区-->
+    <div class="nav">
+        <ul>
+            <li>
+                <a href="user.html" >
+                    <span class="glyphicon glyphicon-user"></span>
+                    用户管理
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <span class="glyphicon glyphicon-list"></span>
+                    分类管理
+                </a>
+                <div class="child">
+                    <a href="first.html" class="now">一级分类</a>
+                    <a href="first.html">二级分类</a>
+                </div>
+            </li>
+            <li>
+                <a href="product.html">
+                    <span class="glyphicon glyphicon-tags"></span>
+                    商品管理
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--main主体区域-->
+<div class="lt_main"></div>
+
+
+
+
+
+
+
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+<script src="lib/nprogress/nprogress.js"></script>
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>
