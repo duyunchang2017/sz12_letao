@@ -1,30 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <title>乐淘管理系统-首页</title>
-    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.css">
-    <link rel="stylesheet" href="lib/nprogress/nprogress.css"/>
-    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="lib/nprogress/nprogress.css">
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
-<!--aside侧边栏-->
+
 <div class="lt_aside">
-    <!-- 品牌区-->
     <div class="brand">
         <a href="index.html">黑马12期</a>
     </div>
-    <!-- 用户信息区-->
     <div class="user">
-        <img src="images/default.png" alt=""/>
+        <img src="images/default.png" alt="">
         <p>超级管理员</p>
     </div>
-    <!-- 导航区-->
     <div class="nav">
         <ul>
             <li>
-                <a class="now" href="user.html" >
+                <a class="now" href="user.html">
                     <span class="glyphicon glyphicon-user"></span>
                     用户管理
                 </a>
@@ -35,9 +32,10 @@
                     分类管理
                 </a>
                 <div class="child" style="display: none;">
-                    <a href="first.html" >一级分类</a>
+                    <a href="first.html">一级分类</a>
                     <a href="second.html">二级分类</a>
                 </div>
+
             </li>
             <li>
                 <a href="product.html">
@@ -48,23 +46,26 @@
         </ul>
     </div>
 </div>
-<!--main主体区域-->
-<div class="lt_main">
-    <!-- 顶部通栏-->
-    <div class="topbar">
-        <a class="pull-left btn_menu" href="javascript:;"><span class="glyphicon glyphicon-align-justify "></span></a>
-        <a class="pull-right btn_logout" href="javascript:;"><span class="glyphicon glyphicon-log-out"></span></a>
 
+<div class="lt_main">
+
+    <!--顶部通栏-->
+    <div class="topbar">
+        <a class="pull-left btn_menu" href="javascript:;"><span class="glyphicon glyphicon-align-justify"></span></a>
+        <a class=" pull-right btn_logout" href="javascript:;"><span class="glyphicon glyphicon-log-out"></span></a>
     </div>
-    <!-- 面包屑导航-->
+
     <div class="container-fluid">
+        <!--面包屑导航-->
         <ol class="breadcrumb">
             <li><a href="#">管理系统</a></li>
             <li class="active">用户管理</li>
         </ol>
 
-        <!-- 内容区域-->
+
+        <!--内容区域-->
         <div class="lt_content">
+
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -79,27 +80,27 @@
                 <!--挖个坑-->
                 </tbody>
             </table>
-            <!-- bootstrap分页插件如果是3.0版本，要求这个盒子必须是ul-->
+
+            <!--boostrap分页插件如果是3.0版本，要求这个盒子必须是ul-->
             <div class="text-right">
-                <ul id="paginator">
-
-
-
-                </ul>
+                <ul id="paginator"></ul>
             </div>
+
+
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="logoutModal">
+
+<!--role aria sr-only: 屏幕阅读器使用-->
+<div class="modal fade" tabindex="-1" id="logoutModal">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 <h4 class="modal-title">温馨提示</h4>
             </div>
             <div class="modal-body">
-
                 <p class="text-danger">
                     <span class="glyphicon glyphicon-info-sign"></span>
                     您确定要退出后台管理系统吗？
@@ -107,7 +108,29 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary btn_conform">确定</button>
+                <button type="button" class="btn btn-primary btn_confirm">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--禁用启用模态框-->
+<div class="modal fade" tabindex="-1" id="userModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">温馨提示</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-danger">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                    您确定要执行此操作吗？
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn_edit">确定</button>
             </div>
         </div>
     </div>
@@ -120,19 +143,17 @@
         <td>{{v.username}}</td>
         <td>{{v.mobile}}</td>
         <td>{{v.isDelete===1?'正常':'禁用'}}</td>
-        <td>
-            {{if v.isDelete ===  1}}
+        <td data-id="{{v.id}}">
+            {{if v.isDelete === 1}}
             <button class="btn btn-danger btn-sm">禁用</button>
             {{/if}}
-            {{if v.isDelete == 0}}
+            {{if v.isDelete === 0}}
             <button class="btn btn-success btn-sm">启用</button>
             {{/if}}
         </td>
     </tr>
     {{/each}}
 </script>
-
-
 
 <script src="lib/jquery/jquery.min.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>

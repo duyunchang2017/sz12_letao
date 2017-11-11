@@ -1,49 +1,85 @@
 /**
- * Created by lenovo on 2017/11/10 0010.
+ * Created by HUCC on 2017/11/10.
  */
-$(function(){
-    //Ò³ÃæÒ»¼ÓÔØ¾ÍÒª°ÑÓÃ»§µÄÊı¾İÄÃÏÂÀ´£¬·¢ËÍajaxÇëÇó£¬»ñÈ¡µ½ÓÃ»§µÄÊı¾İ
-    //½áºÏÄ£°åÒıÇæ£¬°ÑÊı¾İäÖÈ¾µ½Ò³Ãæ
-    var currentPage = 1;//ÓÃÀ´¼ÇÂ¼µ±Ç°Ò³
-    var pageSize = 5;//ÓÃÀ´¼ÇÂ¼Ã¿Ò³µÄÌõÊı
 
+$(function () {
 
-    function render(){
+    //å‘é€ajaxè¯·æ±‚ï¼Œè·å–åˆ°ç”¨æˆ·çš„æ•°æ®
+    //ç»“åˆæ¨¡æ¿å¼•æ“ï¼ŒæŠŠæ•°æ®æ¸²æŸ“åˆ°é¡µé¢
+    var currentPage = 1;//è®°å½•å½“å‰é¡µ
+    var pageSize = 5;//è®°å½•æ¯é¡µçš„æ•°é‡
+
+    function render() {
         $.ajax({
-            type:'get',
-            url:'/user/queryUser',
-            data:{
+            type: "get",
+            url: "/user/queryUser",
+            data: {
                 page: currentPage,
                 pageSize: pageSize
             },
-            success:function(data){
+            success: function (data) {
                 console.log(data);
-                var html= template('tpl',data);
-                $('tbody').html(html);
-                //äÖÈ¾·ÖÒ³
-                $('#paginator').bootstrapPaginator({
-                    bootstrapMajorVersion:3,//Ä¬ÈÏÊÇ2£¬Èç¹ûÊÇbootstrap3°æ±¾£¬Õâ¸ö²ÎÊı±ØÌî
-                    currentPage:currentPage,//µ±Ç°Ò³
-                    totalPages:Math.ceil(data.total/ pageSize),//×ÜÒ³Êı
-                    size:"small",//ÉèÖÃ¿Ø¼şµÄ´óĞ¡
+                var html = template("tpl", data);
+                $("tbody").html(html);
 
-                    //numberOfPages:10
-                    //size:"small",//ÉèÖÃ¿Ø¼şµÄ´óĞ¡£¬mini, small, normal,large
-                    //Ç°Èı¸ö²ÎÊı²»ÓÃ¹Ü£¬Ö±½ÓĞ´a,b,c¾Í¿ÉÒÔ
-                    onPageClicked:function(a, b, c,page){
-                        //    //Îª°´Å¥°ó¶¨µã»÷ÊÂ¼ş page:µ±Ç°µã»÷µÄ°´Å¥Öµ
-                        //pageÖ¸¶¨µÄÊÇµã»÷µÄÒ³Âë£¬ĞŞ¸ÄÁËµ±Ç°Ò³
+
+                //æ¸²æŸ“åˆ†é¡µ
+                $("#paginator").bootstrapPaginator({
+                    bootstrapMajorVersion: 3,//æŒ‡å®šbootstrapçš„ç‰ˆæœ¬ï¼Œå¦‚æœæ˜¯3ï¼Œå¿…é¡»æŒ‡å®š
+                    currentPage: currentPage,//æŒ‡å®šå½“å‰é¡µ
+                    totalPages: Math.ceil(data.total / pageSize),//æŒ‡å®šæ€»é¡µæ•°
+                    size: "small",//è®¾ç½®æ§ä»¶çš„å¤§å°
+                    onPageClicked: function (a, b, c, page) {
+                        //pageæŒ‡çš„æ˜¯ç‚¹å‡»çš„é¡µç ,ä¿®æ”¹äº†å½“å‰é¡µ
                         currentPage = page;
-                        //ÖØĞÂäÖÈ¾Ò³Ãæ
+                        //é‡æ–°æ¸²æŸ“
                         render();
                     }
-
-
-                })
+                });
             }
-        });
+        })
     }
-    //µ÷ÓÃrender
+
     render();
+
+
+    //ç¦ç”¨å¯ç”¨åŠŸèƒ½ï¼Œéœ€è¦æ³¨å†Œå§”æ‰˜äº‹ä»¶
+    $("tbody").on("click", ".btn", function () {
+
+        //å¼¹å‡ºæ¨¡æ€æ¡†
+        $("#userModal").modal("show");
+
+        //è·å–åˆ°å½“å‰æŒ‰é’®å¯¹åº”çš„id
+        var id = $(this).parent().data("id");
+        //è·å–æ˜¯ç¦ç”¨è¿˜æ˜¯å¯ç”¨, å¦‚æœæ˜¯ç¦ç”¨æŒ‰é’®ï¼Œå‘é€0ï¼Œå¦åˆ™å‘é€1
+        var isDelete = $(this).hasClass("btn-danger")?0:1;
+
+        $(".btn_edit").off().on("click", function () {
+            //å‘é€ajaxè¯·æ±‚
+            $.ajax({
+                type:"post",
+                url:"/user/updateUser",
+                data:{
+                    id:id,//å‰é¢æ˜¯æ¥å£æ–‡æ¡£ä¸Šçš„ï¼Œåé¢æ˜¯è‡ªå·±èµ·çš„
+                    isDelete:isDelete//å‰é¢æ˜¯æ¥å£æ–‡æ¡£ä¸Šçš„ï¼Œåé¢æ˜¯è‡ªå·±èµ·çš„
+                },
+                success:function (data) {
+                    if(data.success){
+
+                        //æ“ä½œæˆåŠŸ
+                        //æ¨¡æ€æ¡†å…³é—­
+                        $("#userModal").modal("hide");
+                        //é‡æ–°æ¸²æŸ“
+                        render();
+
+                    }
+                }
+            });
+        });
+
+    });
+
+
+
 
 });
