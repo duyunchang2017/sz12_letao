@@ -51,11 +51,11 @@
 <!--main主体区域-->
 <div class="lt_main">
     <!-- 顶部通栏-->
-  <div class="topbar">
-      <a class="pull-left btn_menu" href="javascript:;"><span class="glyphicon glyphicon-align-justify "></span></a>
-      <a class="pull-right btn_logout" href="javascript:;"><span class="glyphicon glyphicon-log-out"></span></a>
+    <div class="topbar">
+        <a class="pull-left btn_menu" href="javascript:;"><span class="glyphicon glyphicon-align-justify "></span></a>
+        <a class="pull-right btn_logout" href="javascript:;"><span class="glyphicon glyphicon-log-out"></span></a>
 
-  </div>
+    </div>
     <!-- 面包屑导航-->
     <div class="container-fluid">
         <ol class="breadcrumb">
@@ -63,11 +63,36 @@
             <li><a href="#">分类管理</a></li>
             <li class="active">二级分类</li>
         </ol>
-    </div>
-    <!-- 内容区域-->
-    <div class="lt_content">
+        <!-- 内容区域-->
+        <div class="lt_content">
+            <button class="btn tn-default mb_20 btn_add">添加分类</button>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <td width="10%">序号</td>
+                    <td width="30%">一级分类名称</td>
+                    <td width="30%">二级分类名称</td>
+                    <td width="30%">二级分类LOGO</td>
 
+                </tr>
+                </thead>
+                <tbody>
+                   <!-- 挖坑-->
+                </tbody>
+            </table>
+            <div class="text-right">
+                <ul id="paginator">
+
+                </ul>
+            </div>
+
+
+
+
+
+        </div>
     </div>
+
 </div>
 
 <div class="modal fade" id="logoutModal">
@@ -94,14 +119,71 @@
 
 
 
+<div class="modal fade" id="addModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加分类</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <div class="form-group">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                               <span class="dropdown-text"> 请选择一级分类</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <!-- 挖个坑-->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="brandName" placeholder="请输入二级分类">
+                    </div>
+                </form >
+            </div>
+            <!-- 如果给input标签或者button标签添加一个form="form",并且给form标签添加一个id='form',那么button和input标签不写在
+            form标签里面也能生效，提交->
+            <!-- form="form"可以让表单的控件写在表单的外面，form属性让这个字段跟form表单关联上了，相当于写在里面-->
+            <div class="modal-footer">
+                <button type="button" form="form" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" form="form" class="btn btn-primary btn_conform">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tpl">
+    {{each rows v i}}
+    <tr>
+        <td>{{(page-1)*size+i+1}}</td>
+        <td>{{v.categoryName}}</td>
+        <td>{{v.brandName}}</td>
+        <!-- 有就用v.brandLogo，如果没有就用'images/none.png'-->
+        <td><img src="{{v.brandLogo?v.brandLogo:'images/none.png'}}" width='50' height="50"  alt=""/></td>
+    </tr>
+    {{/each}}
+
+</script>
+
+<script type="text/html" id="tpl2">
+    {{each rows v i}}
+    <li><a href="javascript:;" data-id="{{v.id}}">{{v.categoryName}}</a></li>
+    {{/each}}
+</script>
+
 
 
 <script src="lib/jquery/jquery.min.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+<script src="lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
 <script src="lib/nprogress/nprogress.js"></script>
 <script src="lib/echarts/echarts.min.js"></script>
+<script src="lib/artTemplate/template-web.js"></script>
 <script src="js/common.js"></script>
-<!--<script src="js/index.js"></script>-->
+<script src="js/second.js"></script>
 </body>
 </html>

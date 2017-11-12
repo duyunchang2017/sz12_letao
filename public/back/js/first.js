@@ -87,6 +87,7 @@ $(function(){
                     $form.data('bootstrapValidator').resetForm();
                     //重置表单的数据
                     //reset()方法是dom的方法，要把jquery对象转化成dom对象
+                    //jquery对象其实就是dom对象的封装，jquery对象是一个伪数组，内部存放的是dom对象
                     $form[0].reset();
                 }
             }
