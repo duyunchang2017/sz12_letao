@@ -61,7 +61,39 @@ $(function(){
     $('.dropdown-menu').on('click','a', function () {
        //获取到当前a标签的内容，设置给谁
        $('.dropdown-text').text($(this).text());
+        //修改input框的value值,获取到自定义属性id
+        $('#categoryId').val($(this).data('id'));
 
     })
 
-})
+
+
+
+
+
+
+    //初始化文件上传
+    $("#fileupload").fileupload({
+        dataType:"json",
+        //文件上传完成时，会执行的回调函数，通过这个函数就能获取到图片的地址
+        //第二个参数就有上传的结果 data.result
+        done:function (e, data) {
+            //console.log("图片上传完成拉");
+            console.log(data);
+            //console.log(data.result.picAddr);
+            $(".img_box img").attr("src", data.result.picAddr);
+            ////把图片的地址放到隐藏域中
+            $("#brandLogo").val( data.result.picAddr );
+            //
+            ////让brandLogo校验成功
+            //$form.data("bootstrapValidator").updateStatus("brandLogo", "VALID");
+        }
+    });
+
+
+
+
+
+
+
+});
